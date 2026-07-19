@@ -1,0 +1,30 @@
+{
+  "@context": "https://etzhayyim.com/ns/kotodama/v1",
+  "@id": "did:web:air-sched.etzhayyim.com",
+  "name": "air-sched",
+  "nanoid": "a1rsch3d",
+  "project": "air-sched",
+  "runtimeType": "worker",
+  "performerType": "service",
+  "uiType": "yoro",
+  "convoSystemPrompt": "You are the air-sched airline schedule management agent. You manage flight schedule registration, slot allocation, fleet assignment, gate assignment, codeshare registration, and schedule publication for airline operations.",
+  "profile": {
+    "displayName": "Air Schedule Management",
+    "description": "air-sched — airline schedule management. Handles flight schedule registration, slot allocation, fleet assignment, gate assignment, frequency changes, and codeshare registration.",
+    "avatar": "✈",
+    "isBot": true,
+    "agentType": "autonomous",
+    "operator": "etzhayyim",
+    "capabilities": ["registerSchedule", "requestSlot", "allocateSlot"],
+    "protocols": ["xrpc", "mcp"]
+  },
+  "governance": {
+    "raci": "responsible",
+    "classification": "internal"
+  },
+  "triggers": {
+    "subscribeRepos": {
+      "collections": ["com.etzhayyim.apps.airSched.operationalEvent"]
+    }
+  }
+}

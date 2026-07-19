@@ -1,0 +1,43 @@
+{
+  "name": "kotodama-a1rsch3d",
+  "main": "svelte/.svelte-kit/cloudflare/_worker.js",
+  "compatibility_date": "2025-03-17",
+  "compatibility_flags": [
+    "nodejs_compat",
+    "nodejs_als"
+  ],
+  "vars": {
+    "APP_CAPABILITIES": "[\"registerSchedule\",\"requestSlot\",\"allocateSlot\"]",
+    "APP_DESCRIPTION": "air-sched — airline schedule management. Handles flight schedule registration, slot allocation, fleet assignment, gate assignment, frequency changes, and codeshare registration.",
+    "APP_DISPLAY_NAME": "Air Schedule Management",
+    "APP_FRAMEWORK": "sveltekit-edge-bff",
+    "APP_NANOID": "a1rsch3d",
+    "APP_PERFORMER_TYPE": "service",
+    "APP_UI_TYPE": "yoro",
+    "AGENTGATEWAY_MCP_ROUTER_URL": "https://mcp.etzhayyim.com/xrpc/com.etzhayyim.mcp.message"
+  },
+  "rules": [
+    {
+      "type": "CompiledWasm",
+      "globs": [
+        "**/*.wasm"
+      ]
+    }
+  ],
+  "routes": [
+    {
+      "pattern": "a1rsch3d.etzhayyim.com/*",
+      "zone_name": "etzhayyim.com"
+    },
+    {
+      "pattern": "air-sched.etzhayyim.com/*",
+      "zone_name": "etzhayyim.com"
+    }
+  ],
+  "assets": {
+    "directory": "./svelte/.svelte-kit/cloudflare/client",
+    "binding": "ASSETS",
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "none"
+  }
+}
