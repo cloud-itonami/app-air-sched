@@ -1,6 +1,6 @@
 (ns air-sched.route-test
   (:require [clojure.test :refer [deftest is testing]]
-            [clojure.string :as str]
+            [kotoba.lang.text :as str]
             [air-sched.route :as route]
             [air-sched.view :as view]))
 
