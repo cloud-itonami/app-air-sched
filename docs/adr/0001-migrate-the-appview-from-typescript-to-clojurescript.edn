@@ -32,7 +32,7 @@ tree cda8268、追跡 23 ファイル / 52,600 バイト）:
    a1rsch3d.etzhayyim.com / mcp.etzhayyim.com / dispatcher.etzhayyim.com とも
    NXDOMAIN）。
 
-この workspace の正本言語は cljs と kotoba である（superproject CLAUDE.md の
+この workspace の正本言語は cljs と kotoba である（superproject AGENTS.md の
 runtime 順序: kotoba wasm > clojurewasm > ClojureScript > nbb）。TypeScript は
 そこに無い。
 
