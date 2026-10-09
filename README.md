@@ -75,6 +75,8 @@ cljs になった」が TypeScript の静かな増殖の隠れ蓑にならない
 
 ## Static edition (IPFS)
 
+Published name: `ipns://k51qzi5uqu5dgz0j1gn49mntc90ophjc3rzgyiez4yaed4iqgugu9xnap2z5ow` (recorded with the site CID in `kotoba.app.edn`). Public HTTPS entrance: `https://k51qzi5uqu5dgz0j1gn49mntc90ophjc3rzgyiez4yaed4iqgugu9xnap2z5ow.ipns.220-146-170-114.sslip.io/`.
+
 Worker の `GET /` はどの request にも同じ文書を返すので、それを**ビルド時に
 1 度描いた静的版**を IPFS に置く。正規の所在は IPNS 名（`ipns://k51…` /
 `{k51}.ipns` の gateway origin）で、DNS の名前はその別名である。**Worker 版は
@@ -97,7 +99,7 @@ kbb --backend sci \
 してから publish する。描いたものに `/xrpc`・`/health`・中継先・wrangler の
 var のキーが 1 つでも含まれていれば、書かずに exit 1 で止まる。
 
-## いま在るもの — 27 ファイル
+## いま在るもの — 28 ファイル
 
 | 面 | ファイル |
 |---|---|
