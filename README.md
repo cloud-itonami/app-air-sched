@@ -73,18 +73,45 @@ git に訊いた（この罠は複数の agent が踏んでいる）。なお np
 cljs になった」が TypeScript の静かな増殖の隠れ蓑にならないように。移すなら別の
 決定で、依存する SDK の cljs の面が要る。
 
-## いま在るもの — 25 ファイル
+## Static edition (IPFS)
+
+Published name: `ipns://k51qzi5uqu5dgz0j1gn49mntc90ophjc3rzgyiez4yaed4iqgugu9xnap2z5ow` (recorded with the site CID in `kotoba.app.edn`). Public HTTPS entrance: `https://k51qzi5uqu5dgz0j1gn49mntc90ophjc3rzgyiez4yaed4iqgugu9xnap2z5ow.ipns.220-146-170-114.sslip.io/`.
+
+Worker の `GET /` はどの request にも同じ文書を返すので、それを**ビルド時に
+1 度描いた静的版**を IPFS に置く。正規の所在は IPNS 名（`ipns://k51…` /
+`{k51}.ipns` の gateway origin）で、DNS の名前はその別名である。**Worker 版は
+並行して deploy されたままで、その描画は 1 byte も変わらない**（`:static?` が
+無ければ従来の分岐をそのまま通る）。
+
+静的版には Worker が居ないので、ページは `/health`・`/xrpc/:nsid`・中継先・
+env のキーを**出さない**。route 表は `:route/kind :page` の行だけを描き、XRPC の
+中継は Worker 版にだけあると書く。`wrangler.jsonc` は**ビルド時に読み**、そこに宣言された var のキーが 1 つも出ていないことを確かめる。
+
+```bash
+K=~/github/com-junkawasaki/orgs/kotoba-lang
+kbb --backend sci \
+  --classpath "$K/jp-go-digital-design-system/src:$K/html/src:$K/css/src" \
+  scripts/render-static.kotoba .
+# => WROTE  dist/static/index.html   (dist/ は .gitignore 済み)
+```
+
+出力は決定的である（時刻を入れない）。2 回描いて sha256 が一致することを確認
+してから publish する。描いたものに `/xrpc`・`/health`・中継先・wrangler の
+var のキーが 1 つでも含まれていれば、書かずに exit 1 で止まる。
+
+## いま在るもの — 28 ファイル
 
 | 面 | ファイル |
 |---|---|
 | 判断・描画・edge | `src/air_sched/{route.cljc, view.cljc, worker.cljs}` |
-| テスト | `test/air_sched/route_test.cljc`（5 tests / 22 assertions） |
+| テスト | `test/air_sched/route_test.cljc`（7 tests / 45 assertions） |
 | ビルド | `deps.edn` / `shadow-cljs.edn` / `.gitignore` |
 | Worker 設定 | `wrangler.jsonc` |
 | actor 記述子 | `kotodama.jsonld` |
 | **domain library（appview ではない）** | `kotoba/`（7 ファイル、TypeScript 5 本） |
 | 由来・権利・識別 | `NOTICE` / `README.edn` / `migration.edn` / `MIGRATION-TODO.md` |
 | 検証 | `scripts/{smoke-worker.cljs, verify-docs-claims.cljs}` |
+| 静的版のビルド | `scripts/render-static.kotoba` |
 | 文書 | `README.md` / `docs/operator-quickstart.md` / `docs/adr/0001-*.edn` |
 
 **appview の TypeScript は 0 本、正本言語（`.cljs`/`.cljc`）が 4 本。** 移行前は
